@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Next Reading List</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:
+linear-gradient(rgba(15,28,46,0.95),rgba(15,28,46,0.95)),
+url("https://images.unsplash.com/photo-1512820790803-83ca734da794");
+background-size:cover;
+background-attachment:fixed;
+color:white;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+padding:60px;
+}
+
+.book{
+background:#16243b;
+padding:15px;
+border-radius:10px;
+}
+
+.book img{
+width:100%;
+height:360px;
+object-fit:cover;
+border-radius:5px;
+}
+
+button{
+padding:10px 20px;
+background:darkblue;
+border:none;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#001a66;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>My Next Reading List</h1>
+<button onclick="goHome()">Back to Home</button>
+<div class="grid" id="list"></div>
+<script>
+
+let books = JSON.parse(localStorage.getItem("nextRead1")) || [];
+let container = document.getElementById("list");
+
+if(books.length === 0){
+container.innerHTML = "<p style='grid-column:1/-1; text-align:center; font-size:22px;'>No books in your Next Read list yet 📚</p>";
+}
+
+books.forEach((book,index) => {
+
+let div = document.createElement("div");
+div.className="book";
+
+div.innerHTML = `
+<img src="${book.image}">
+<h3>${book.title}</h3>
+<p>${book.rating}</p>
+<br>
+<button onclick="removeBook(${index})">Remove</button>
+`;
+
+container.appendChild(div);
+
+});
+
+function removeBook(index){
+
+let confirmRemove = confirm("Are you sure you want to remove this book?");
+
+if(confirmRemove){
+
+books.splice(index,1);
+
+localStorage.setItem("nextRead1", JSON.stringify(books));
+
+location.reload();
+
+}
+
+}
+
+function goHome(){
+window.location.href="Books1.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Digital Book Club</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:
+linear-gradient(rgba(15,28,46,0.95),rgba(15,28,46,0.95)),
+url("https://images.unsplash.com/photo-1512820790803-83ca734da794");
+background-size:cover;
+background-attachment:fixed;
+color:white;
+text-align:center;
+}
+
+/* NAVBAR */
+
+nav{
+background:#071427;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+}
+.menu a:hover{
+color:gray;
+}
+
+/* HERO */
+
+.hero{
+padding:120px 20px;
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+background-size:cover;
+background-position:center;
+}
+
+/* COLLECTIONS */
+
+.collections{
+padding:70px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+}
+
+.book{
+background:#16243b;
+padding:15px;
+border-radius:10px;
+}
+
+.book img{
+width:100%;
+height:360px;
+object-fit:cover;
+border-radius:5px;
+}
+
+button{
+padding:10px 20px;
+background:#1e3a8a;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#001a66;
+}
+
+/* BOOK DETAILS PAGE */
+
+#bookPage{
+display:none;
+padding:80px;
+}
+
+.bookContainer{
+display:flex;
+justify-content:center;
+gap:40px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.bookContainer img{
+width:250px;
+border-radius:10px;
+}
+
+.description{
+max-width:400px;
+text-align:left;
+}
+
+.book{
+background:#16243b;
+padding:15px;
+border-radius:10px;
+transition:transform 0.3s;
+}
+
+.book:hover{
+transform:scale(1.05);
+}
+
+/* REVIEWS */
+
+.reviews{
+
+padding:80px 20px;
+}
+
+.review-box{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.review{
+background:#16243b;
+padding:20px;
+width:230px;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+.Box{
+background:#0f1c2e;
+color:#e5e7eb;
+padding:12px;
+border-radius:8px;
+margin-top:10px;
+font-size:14px;
+line-height:1.5;
+border:1px solid #2c3e50;
+}
+
+.review-form{
+margin-top:40px;
+display:flex;
+flex-direction:column;
+gap:10px;
+max-width:400px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.review-form input,
+.review-form textarea{
+padding:10px;
+border-radius:6px;
+border:none;
+}
+
+.review-form textarea{
+height:80px;
+resize:none;
+}
+
+.review-form select{
+padding:10px;
+border-radius:6px;
+border:none;
+}
+
+/* ABOUT */
+
+.about{
+padding:80px 20px;
+
+}
+
+.about-box{
+background:#16243b;
+max-width:700px;
+margin:auto;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+.about h2{
+margin-bottom:20px;
+}
+
+.about p{
+line-height:1.6;
+}
+
+.join-list{
+margin-top:20px;
+}
+
+.join-list p{
+background:#071427;
+padding:10px;
+border-radius:6px;
+margin:8px 0;
+}
+
+/* CONTACT */
+
+.contact{
+
+padding:80px 20px;
+}
+
+.form-box{
+background:#16243b;
+padding:40px;
+border-radius:12px;
+max-width:350px;
+margin:auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+form input, form select{
+padding:12px;
+border:none;
+border-radius:6px;
+}
+
+.error{
+color:#ff4d4d;
+font-size:12px;
+text-align:left;
+}
+
+#successMessage{
+margin-top:15px;
+color:lightgreen;
+font-weight:bold;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:10px;
+max-width:300px;
+margin:auto;
+}
+
+input{
+padding:10px;
+}
+
+footer{
+background:#0f2a4a;
+padding:20px 40px;
+color:white;
+}
+
+.footer-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+footer h2{
+color:white;
+margin:0;
+}
+
+footer p{
+color:white;
+margin:0;
+opacity:0.8;
+font-size:14px;
+}
+padding:20px 40px;
+color:white;
+}
+
+.footer-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+footer h2{
+color:white;
+margin:0;
+}
+
+footer p{
+color:white;
+margin:0;
+opacity:0.8;
+font-size:14px;
+}
+</style>
+</head>
+<body>
+<div id="mainPage">
+<nav>
+<h2>Digital Book Club</h2>
+<div class="menu">
+<a href="#home">Home</a>
+<a href="#collections">Collections</a>
+<a href="#reviews">Reviews</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+<a href="nextread1.html">Next Read</a>
+</div>
+</nav>
+<section id="home">
+<div class="hero">
+<h1>Turn the Page to Your Next Adventure</h1>
+<p>Join our Digital Book Club today</p>
+</div>
+</section>
+<section class="collections" id="collections">
+<h2>Book Collections</h2>
+
+<div class="grid">
+
+<div class="book">
+<img src="harry potter.jpg">
+<h3>Harry Potter</h3>
+<button onclick="openBook(
+'Harry Potter',
+'harry potter.jpg',
+`Harry Potter is an orphan who has lived a difficult life with his relatives until he discovers that he is actually a wizard. He receives an invitation to study at Hogwarts School of Witchcraft and Wizardry where he meets loyal friends and begins learning magic. While adjusting to this new world, Harry also discovers secrets about his past and a dark wizard who once tried to destroy him.`,
+'⭐⭐⭐⭐⭐ 4.8/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="The City Of Bones.jpg">
+<h3>City of Bones</h3>
+<button onclick="openBook(
+'City of Bones',
+'The City Of Bones.jpg',
+`Clary Fray is an ordinary teenager until she witnesses a mysterious murder committed by three teenagers covered in strange tattoos. Soon she learns that they are Shadowhunters, warriors who protect the world from demons. As Clary discovers secrets about her own past and family, she becomes involved in a dangerous battle between supernatural forces.`,
+'⭐⭐⭐⭐ 4.4/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="carrie.jpg">
+<h3>Carrie</h3>
+<button onclick="openBook(
+'Carrie',
+'carrie.jpg',
+`Carrie White is a shy high school girl who suffers constant bullying from her classmates and strict control from her deeply religious mother. After discovering that she possesses powerful telekinetic abilities, Carrie struggles to control both her emotions and her powers. When a cruel prank humiliates her during the school prom, Carrie finally reaches her breaking point.`,
+'⭐⭐⭐⭐ 4.2/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="The Cruel Prince.jpg">
+<h3>The Cruel Prince</h3>
+<button onclick="openBook(
+'The Cruel Prince',
+'The Cruel Prince.jpg',
+`Jude Duarte is a mortal girl living in the magical world of Faerie after her parents were murdered. Even though humans are looked down upon in the faerie kingdom, Jude dreams of gaining power and respect. She must face dangerous politics, betrayals, and the cruel Prince Cardan while trying to survive in a world where magic and deception rule.`,
+'⭐⭐⭐⭐⭐ 4.7/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="pride.jpg">
+<h3>Pride and Prejudice</h3>
+<button onclick="openBook(
+'Pride and Prejudice',
+'pride.jpg',
+`Elizabeth Bennet is a clever and independent young woman living in early nineteenth century England. When she meets the wealthy but reserved Mr Darcy, their first impressions create misunderstandings and conflict. As they continue to interact, both characters must overcome their pride and prejudices to understand each other better.`,
+'⭐⭐⭐⭐⭐ 4.9/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="shining.jpg">
+<h3>The Shining</h3>
+<button onclick="openBook(
+'The Shining',
+'shining.jpg',
+`Jack Torrance accepts a job as the winter caretaker of the isolated Overlook Hotel, hoping it will help him rebuild his life and repair his family relationships. As the heavy snow traps them inside the hotel, strange and frightening events begin to occur. Meanwhile his young son Danny, who has psychic abilities known as the shining, begins to sense the terrifying secrets hidden within the hotel.`,
+'⭐⭐⭐⭐ 4.5/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="crows.jpg">
+<h3>Six of Crows</h3>
+<button onclick="openBook(
+'Six of Crows',
+'crows.jpg',
+`Kaz Brekker is a criminal mastermind who is offered an impossible mission that could make him incredibly rich. To complete the dangerous heist, he gathers a team of six outcasts, each with unique skills and troubled pasts. Together they must face deadly enemies, betrayals, and impossible obstacles while attempting the most daring robbery of their lives.`,
+'⭐⭐⭐⭐⭐ 4.8/5'
+)">View</button>
+</div>
+
+<div class="book">
+<img src="wings.jpg">
+<h3>Fourth Wing</h3>
+<button onclick="openBook(
+'Fourth Wing',
+'wings.jpg',
+`Violet Sorrengail expected to live a quiet life studying books, but instead she is forced to join a brutal dragon rider academy where survival is never guaranteed. The training is dangerous and many students do not make it through. Violet must rely on her intelligence and determination to survive while forming powerful alliances and discovering secrets within the academy.`,
+'⭐⭐⭐⭐ 4.6/5'
+)">View</button>
+</div>
+
+</div>
+</section>
+</div>
+<div id="bookPage">
+<h1 id="bookTitle"></h1>
+<div class="bookContainer">
+<img id="bookImage">
+<div class="description">
+<p id="bookDescription"></p>
+<h3 id="bookRating"></h3>
+<br>
+<button onclick="addToNextRead()">Add to Next Read</button>
+<br><br>
+<button onclick="goBack()">Back to Collections</button>
+</div>
+</div>
+</div>
+<section id="reviews" class="reviews">
+<h2>Member Reviews</h2>
+<div class="review-box">
+<div class="review">
+<h4>Marryyyyy</h4>
+<p>The Cruel Prince <br> By Holly Black</p>
+<p style="color:gold;font-size:18px">⭐⭐⭐⭐⭐</p>
+<div class="Box">
+Amazing fantasy book with political intrigue, strong characters and a dark magical world. The enemies-to-lovers tension makes the story even more exciting.
+</div>
+</div>
+<div class="review">
+<h4>Ashhhh_111</h4>
+<p>Pride and Prejudice <br> By Jane Austen</p>
+<p style="color:gold;font-size:18px">⭐⭐⭐⭐⭐</p>
+<div class="Box">
+A timeless romance that explores love, misunderstanding and social class with wit and charm. Elizabeth Bennet and Mr. Darcy's relationship is unforgettable.
+</div>
+</div>
+<div class="review">
+<h4>SarahL</h4>
+<p>The Shining <br> By Stephen King</p>
+<p style="color:gold;font-size:18px">⭐⭐⭐⭐⭐</p>
+<div class="Box">
+A chilling horror novel that slowly builds terror through isolation, madness and psychological fear. The suspense keeps you hooked till the end.
+</div>
+</div>
+</div>
+<br>
+<h3>Write a Review</h3>
+<div class="review-form">
+<input type="text" id="reviewName" placeholder="Your Name">
+<input type="text" id="bookName" placeholder="Book Name">
+<select id="rating">
+<option value="">Select Rating</option>
+<option value="⭐">⭐ 1 Star</option>
+<option value="⭐⭐">⭐⭐ 2 Stars</option>
+<option value="⭐⭐⭐">⭐⭐⭐ 3 Stars</option>
+<option value="⭐⭐⭐⭐">⭐⭐⭐⭐ 4 Stars</option>
+<option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ 5 Stars</option>
+</select>
+<textarea id="reviewText" placeholder="Write your review..."></textarea>
+<button onclick="addReview()">Submit Review</button>
+</div>
+</div>
+</section>
+<section id="about" class="about">
+<div class="about-box">
+<h2>Our Mission</h2>
+<p>
+Digital Book Club is a community where readers can discover books,
+share reviews and connect with fellow book lovers.
+</p>
+<h3>Who Can Join?</h3>
+<div class="join-list">
+<p>📚 Students</p>
+<p>📖 Casual Readers</p>
+<p>❤️ Avid Book Lovers</p>
+<p>🌎 Anyone interested in reading</p>
+</div>
+</div>
+</section>
+<section id="contact" class="contact">
+<h2>Join the Club</h2>
+<div class="form-box">
+<form id="joinForm">
+<input type="text" id="name" placeholder="Your Name">
+<span class="error" id="nameError"></span>
+<input type="email" id="email" placeholder="Email Address">
+<span class="error" id="emailError"></span>
+<input type="number" id="age" placeholder="Your Age">
+<span class="error" id="ageError"></span>
+<select id="genre">
+<option value="">Favorite Genre</option>
+<option>Fantasy</option>
+<option>Romance</option>
+<option>Horror</option>
+<option>Mystery</option>
+<option>Adventure</option>
+</select>
+<span class="error" id="genreError"></span>
+<button type="submit">JOIN</button>
+</form>
+<p id="successMessage"></p>
+</div>
+</section>
+<footer>
+<div class="footer-bar">
+<h2>Digital Book Club</h2>
+<p>© 2026 Digital Book Club</p>
+</div>
+</footer>
+<script>
+
+function goBack(){
+
+document.getElementById("mainPage").style.display="block";
+document.getElementById("reviews").style.display="block";
+document.getElementById("about").style.display="block";
+document.getElementById("contact").style.display="block";
+
+document.getElementById("bookPage").style.display="none";
+
+}
+
+document.getElementById("joinForm").addEventListener("submit", function(event){
+
+event.preventDefault();
+
+let name = document.getElementById("name").value;
+let email = document.getElementById("email").value;
+let age = document.getElementById("age").value;
+let genre = document.getElementById("genre").value;
+
+let valid = true;
+
+document.getElementById("nameError").innerText="";
+document.getElementById("emailError").innerText="";
+document.getElementById("ageError").innerText="";
+document.getElementById("genreError").innerText="";
+
+if(name.length < 3){
+document.getElementById("nameError").innerText="Enter a valid name";
+valid=false;
+}
+
+if(!email.includes("@")){
+document.getElementById("emailError").innerText="Enter valid email";
+valid=false;
+}
+
+if(age < 10 || age > 100){
+document.getElementById("ageError").innerText="Enter valid age";
+valid=false;
+}
+
+if(genre === ""){
+document.getElementById("genreError").innerText="Select a genre";
+valid=false;
+}
+
+if(valid){
+document.getElementById("successMessage").innerText="🎉 Welcome to the Digital Book Club!";
+document.getElementById("joinForm").reset();
+}
+
+});
+
+function addReview(){
+
+let name = document.getElementById("reviewName").value;
+let book = document.getElementById("bookName").value;
+let rating = document.getElementById("rating").value;
+let text = document.getElementById("reviewText").value;
+
+if(name === "" || book === "" || rating === "" || text === ""){
+alert("Please fill all fields");
+return;
+}
+
+let reviewContainer = document.querySelector(".review-box");
+
+let newReview = document.createElement("div");
+newReview.className = "review";
+
+newReview.innerHTML = `
+<h4>${name}</h4>
+<p>${book}</p>
+<p style="color:gold;font-size:18px">${rating}</p>
+<div class="Box">${text}</div>
+`;
+
+reviewContainer.appendChild(newReview);
+
+document.getElementById("reviewName").value="";
+document.getElementById("bookName").value="";
+document.getElementById("rating").value="";
+document.getElementById("reviewText").value="";
+}
+let currentBook = {};
+
+function openBook(title,image,description,rating){
+
+currentBook = {
+title:title,
+image:image,
+description:description,
+rating:rating
+};
+
+document.getElementById("mainPage").style.display="none";
+document.getElementById("reviews").style.display="none";
+document.getElementById("about").style.display="none";
+document.getElementById("contact").style.display="none";
+
+document.getElementById("bookPage").style.display="block";
+
+document.getElementById("bookTitle").innerText=title;
+document.getElementById("bookImage").src=image;
+document.getElementById("bookDescription").innerText=description;
+document.getElementById("bookRating").innerText="Rating: "+rating;
+
+}
+
+function addToNextRead(){
+
+let list = JSON.parse(localStorage.getItem("nextRead1")) || [];
+
+// check if the book already exists
+for(let i = 0; i < list.length; i++){
+
+if(list[i].title === currentBook.title){
+alert("This book is already in your Next Read list!");
+return;
+}
+
+}
+
+// if not duplicate, add book
+list.push(currentBook);
+
+localStorage.setItem("nextRead1", JSON.stringify(list));
+
+alert("Book added to Next Read!");
+
+}
+
+function goHome(){
+window.location.href="Books1.html";
+}
+</script>
+
+</body>
+</html>
